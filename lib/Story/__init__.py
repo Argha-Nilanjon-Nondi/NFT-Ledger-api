@@ -1,5 +1,6 @@
 from lib.SqlRunner import SqlRunner
 from lib.SecretCrypto import Cryptography
+from lib.Validation import Validation
 from datetime import datetime
 
 def currentTime():
@@ -57,6 +58,11 @@ class Story:
 		obj=Cryptography()
 		publicKey=obj.privateKeyToPublicKey(privateKey)
 		
+		objValid=Validation()
+		
+		if(objValid.isPublicKeyExist(publicKey)==False):
+			raise ValueError("public key is not in the ledger")
+		
 		objSql=SqlRunner("Ledger.sqlite")
 		
 		eventDate=currentTime()
@@ -110,12 +116,17 @@ class Story:
 		
 	def check_signature(self,publicKey,signature):
 		
+		objValid=Validation()
+		
+		if(objValid.isPublicKeyExist(publicKey)==False):
+			raise ValueError("public key is not in the ledger")
+		
 		obj=Cryptography()
 		objSql=SqlRunner("Ledger.sqlite")
 		
 		objSql.sql="""
 		  Select PublicKey,StoryName,StoryDescription,EventDate,PreviousHash,Char,Level From Stories Where Signature='{signature}'; 
-		""".format(signature=signature,publicKey=publicKey)
+		""".format(signature=signature)
 		
 		data_list=objSql.run()
 		data=data_list[0]
