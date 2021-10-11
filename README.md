@@ -27,8 +27,8 @@ print(objUser.add(name="Rahul Hassan",nId="128646979",description="New member",l
 #### output
 ```json
 {
-   'private_key': '2d2d2d2d2d424547494e20525341205052d0a4d4949435851494241414b42675143764a57786177......', 
-   'public_key': '2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d494......'
+   "private_key": "2d2d2d2d2d424547494e20525341205052d0a4d4949435851494241414b42675143764a57786177......", 
+   "public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d494......"
 }
 ```
 
@@ -116,15 +116,15 @@ print(objNFT.findOwner(nft=nft))
 ```json
 [
    {
-      'owner':'2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413.........', 
-      'seller_public_key':'2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413047435.......', 
-      'buyer_public_key':'2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d4130474353714753......', 
-     'token': 1664, 
-     'signature':'29f0e4a8a5a42efb4012d0738e8ba2baa389fcfa57f96.....', 
-     'status': 'nft_added', 
-      'level': 3, 
-      'char': '0', 
-      'file_location':'https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk'
+      "owner":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413.........", 
+      "seller_public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413047435.......", 
+      "buyer_public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d4130474353714753......", 
+     "token": 1664, 
+     "signature":"29f0e4a8a5a42efb4012d0738e8ba2baa389fcfa57f96.....", 
+     "status": "nft_added", 
+      "level": 3, 
+      "char": "0", 
+      "file_location":"https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk"
     }
 ]
 ```
