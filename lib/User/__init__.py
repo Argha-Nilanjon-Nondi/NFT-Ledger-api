@@ -8,14 +8,14 @@ def currentTime():
 	date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
 	return date_time
 
-class Writer:
+class User:
 	def __init__(self):
 		pass
 		
 	def verify(self):
 		objSql=SqlRunner("Ledger.sqlite")
 		objSql.sql="""
-		  Select PublicKey,Name,NID,PreviousHash,EventDate,Char,Level,Description,token from Writers
+		  Select PublicKey,Name,NID,PreviousHash,EventDate,Char,Level,Description,token from Users
 		"""
 		data_list=objSql.run()
 		
@@ -58,7 +58,7 @@ class Writer:
 		
 		objSql=SqlRunner("Ledger.sqlite")
 		objSql.sql="""
-		  Select Hash,No from Writers
+		  Select Hash,No from Users
 		  ORDER BY No DESC LIMIT 1 
 		"""
 		previousHash=objSql.run()[0][0]
@@ -80,7 +80,7 @@ class Writer:
 		token=hash_token["token"]
 		
 		sql_code="""
-		INSERT INTO Writers(No,PublicKey,Name,NID,PreviousHash,Level,Char,Hash,Token,Description,EventDate)
+		INSERT INTO Users(No,PublicKey,Name,NID,PreviousHash,Level,Char,Hash,Token,Description,EventDate)
 		Values({0},'{1}','{2}','{3}','{4}',{5},'{6}','{7}','{8}','{9}','{10}')
 		""".format(no+1,publicKey,name,nId,previousHash,level,char,hash,token,description,eventDate)
 		

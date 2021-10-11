@@ -6,7 +6,7 @@ import binascii
 
 
 def getHash(data,num):
-	data=str(data)+str(num)
+	data=str(data)+"======="+str(num)
 	hash = SHA256.new(data.encode())
 	hash_string=hash.hexdigest()
 	return hash_string				
