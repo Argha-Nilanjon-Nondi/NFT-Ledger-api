@@ -5,7 +5,7 @@ from lib.Validation import Validation
 
 def currentTime():
 	now = datetime.now() 
-	date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
+	date_time = now.strftime("%Y-%m-%d %H:%M:%S")
 	return date_time
 
 class User:
