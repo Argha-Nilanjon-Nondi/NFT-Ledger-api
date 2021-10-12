@@ -12,172 +12,210 @@ And run this command
 ```
 
   
-## Documentation
-### Add  an user
+## API Reference
 
-#### code
-```python
-from lib.User import User
-
-objUser=User()
-print(objUser.add(name="Rahul Hassan",nId="128646979",description="New member",level=4,char="0"))
+### Verify the chain of user
+  
+#### URL  
+```http
+GET http://localhost:5000/api/verify/user
 ```
-#### if the level=3 and char="0" then the hash will start with 000.The time to add a new writer will depends on the level . If the level is increased , the time will be increased as well.
 
-#### output
+#### Response
 ```json
 {
-   "private_key": "2d2d2d2d2d424547494e20525341205052d0a4d4949435851494241414b42675143764a57786177......", 
-   "public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d494......"
+    "code": 200,
+    "data": {
+        "status": true
+    },
+    "message": "Verify the chain of user"
 }
 ```
 
-#### Here public_key is saved on ledger.sqlite but the private_key is not saved on ledger.sqlite. A user must save it on their computer and they should not share it with anyone but public_key can be shared with anyone
+<br />
 
-### Verify the users chain
-#### code
-```python
-from lib.User import User
 
-objUser=User()
-print(objUser.verify())
+### Verify the chain of NFT
+  
+#### URL  
+```http
+GET http://localhost:5000/api/verify/nft
 ```
-#### output 1
-```boolean
-True
-```
-#### If anybody does not modify the data of the table named 'Users' of 'Ledger.sqlite' 
 
-#### output 2
-```boolean
-False
-```
-#### If anybody modifies the data of the table named 'Users' of 'Ledger.sqlite'
-
-
-
-### Verify the nfts chain
-#### code
-```python
-from lib.NFT import NFT
-
-objNFT=NFT()
-print(objNFT.verify())
-```
-#### output 1
-```boolean
-True
-```
-#### If anybody does not modify the data of the table named 'NFTs' of 'Ledger.sqlite' 
-
-#### output 2
-```boolean
-False
-```
-#### If anybody modifies the data of the table named 'NFTs' of 'Ledger.sqlite'
-
-
-
-### Add a new NFT
-#### code
-```python
-from lib.NFT import NFT
-
-objNFT=NFT()
-
-privateKey="2d2d2d2d2d424547494e205253412050524956415445204b45592d2d2d....."
-nft="603c12257afa281384267d9af9ea57299d3e9d5e30dc4c6ed6b339e188d7db0d"
-fileLocation="""https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk"""
-level=3
-char="0"
-
-objNFT.add_nft(privateKey=privateKey,nft=nft,fileLocation=fileLocation,level=level,char=char)
-```
-#### if the level=3 and char="0" then the hash will start with 000.The time to add a new writer will depends on the level . If the level is increased , the time will be increased as well.
-
-#### output
-```text
-42ac0cfec6b20078d0adb665479ed13ac85e1620fae5c24114e89c4858b477504095ad9a71d112e5fddal....
-```
-#### It is a signature of the NFT . It can be verify by using public key.
-
-
-### Details of a NFT
-#### code
-```python
-from lib.NFT import NFT
-
-nft="603c12257afa281384267d9af9ea57299d3e9d5e30dc4c6ed6b339e188d7db0d"
-
-objNFT=NFT()
-print(objNFT.findOwner(nft=nft))
-```
-#### output
+#### Response
 ```json
-[
-   {
-      "owner":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413.........", 
-      "seller_public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413047435.......", 
-      "buyer_public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d4130474353714753......", 
-     "token": 1664, 
-     "signature":"29f0e4a8a5a42efb4012d0738e8ba2baa389fcfa57f96.....", 
-     "status": "nft_added", 
-      "level": 3, 
-      "char": "0", 
-      "file_location":"https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk"
-    }
-]
+{
+    "code": 200,
+    "data": {
+        "status": true
+    },
+    "message": "Verify the chain of NFT"
+}
 ```
-#### owner and buyer_public_key have same value.
+
+<br />
 
 
 
-### Check a signature
-#### code
-```python
-from lib.NFT import NFT
 
-objNFT=NFT()
-
-sellerPublicKey="2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664....."
-
-signature="42ac0cfec6b20078d0adb665479ed13ac85e1620fae5c24114e89c4858b477504095ad9a71d112e5fd....."
-
-print(objNFT.check_signature(sellerPublicKey=sellerPublicKey,signature=signature))
+### Add a user
+  
+#### URL  
+```http
+POST http://localhost:5000/api/add/user
 ```
-#### output 1
-```text
-True
+
+#### Json Data
+```json
+{
+    "username":"Karim Hassan",
+    "description":"New memeber",
+    "nid":"3246564543"
+}
 ```
-#### If the signature is assigned with public key
-#### output 2
-```text
-False
+
+#### Response
+```json
+{
+    "code": "201",
+    "data": {
+        "private_key": "2d2d2d2d2d424547494e20525341205052492d.....",
+        "public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2...."
+    },
+    "message": "user is created"
+}
 ```
-#### If the signature is not assigned with public key
+
+<br />
 
 
 
-### Transfer a NFT's ownership
-#### code
-```python
-from lib.NFT import NFT
-
-objNFT=NFT()
-
-sellerPrivateKey="2d2d2d2d2d424547494e205253412050524956415445204b45592d2d2d2d2d....'"
-
-buyerPublicKey="2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413047435....."
-
-nft="603c12257afa281384267d9af9ea57299d3e9d5e30dc4c6ed6b339e188d7db0d"
-
-print(obj.transfer_nft(sellerPrivateKey=sellerPrivateKey,buyerPublicKey=buyerPublicKey,nft=nft))
+### Add a NFT
+  
+#### URL  
+```http
+POST http://localhost:5000/api/add/nft
 ```
-#### output
-```text
-42ac0cfec6b20078d0adb665479ed13ac85e1620fae5c24114e89c4858b477504095ad9a71d112e5fddafc3e2da8f0f5fa008cef3ad4aa4a30541d04502e5029c7dc17
+
+#### Json Data
+```json
+{
+    "private_key":"2d2d2d2d2d424547494e2052534163495047413d3d0a2d2d2d2d...",
+    "nft":"a53c12257afa281384267d9af9ec57299d3e9d5e30dc4c6ed6b339e188d7db0a",
+    "file_location":"https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk"
+}
 ```
-#### It returns a signature , which can be verify by using the public key
+
+#### Response
+```json
+{
+    "code": "201",
+    "data": {
+        "signature": "7ebaf58a02ce8955831a8e8f67b20bbab951f8d7e3b379048c3560b9e37b7920d735da97a4bc24304d10c1466660f1bc214be5b77b68c6c0a297a5b1654c6842ec6f806403a6c45d045246a30c2b49920e8539bccdeb7d5c638fd900fdee47e2916e3a4c4c1a8dd05c7e28ea7ed6ffd86b8218447b64e143a124751a2b3bd762"
+    },
+    "message": "NFT is added"
+}
+```
+
+<br />
+
+
+
+### Change the ownership of a NFT
+  
+#### URL  
+```http
+POST http://localhost:5000/api/transfer/nft
+```
+
+#### Json Data
+```json
+{
+    "seller_private_key":"2d2d2d2d2d424547494e205253412050524956415445204b45592d2d2d2d2d0a4.......",
+    "nft":"a53c12257afa281384267d9af9ec57299d3e9d5e30dc4c6ed6b339e188d7db0a",
+    "buyer_public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d413........"
+}
+```
+
+#### Response
+```json
+{
+    "code": "202",
+    "data": {
+        "signature": "543c6257c3c265e171783c5d1feb1038d909a0a319a34e05fc7b50aaa47a08fabe2bc13df833cdffd16cd....."
+    },
+    "message": "ownership of the NFT has been changed"
+}
+```
+
+<br />
+
+
+
+### Get details of a NFT
+  
+#### URL  
+```http
+POST http://localhost:5000/api/detail/nft
+```
+
+#### Json Data
+```json
+{
+    "nft":"a53c12257afa281384267d9af9ec57299d3e9d5e30dc4c6ed6b339e188d7db0a"
+}
+```
+
+#### Response
+```json
+{
+    "code": "202",
+    "data": {
+        "buyer_public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d4130.....",
+        "char": "0",
+        "file_location": "https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk",
+        "level": 3,
+        "owner": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d41304743537147534962.....",
+        "seller_public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d41304743537147534.....",
+        "signature": "543c6257c3c265e171783c5d1feb1038d909a0a319a34e05fc7b50aaa47a08fab.....",
+        "status": "ownership_changed",
+        "token": 3728
+    },
+    "message": "detail of NFT has been retrieved"
+}
+```
+
+<br />
+
+
+
+### Verify a signature
+  
+#### URL  
+```http
+POST http://localhost:5000/api/verify/signature
+```
+
+#### Json Data
+```json
+{
+"seller_public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4.....",
+"signature": "543c6257c3c265e171783c5d1feb1038d909a0a319a34e05fc7b50aaa47a08fabe2bc13df83....."
+}
+```
+
+#### Response
+```json
+{
+    "code": "200",
+    "data": {
+        "signature": true
+    },
+    "message": "verification of a signature"
+}
+```
+
+<br />
 
 ## Built with
 

@@ -63,12 +63,6 @@ class NFT:
 		
 	
 	def findOwner(self,nft):
-		obj=Cryptography()
-		objValid=Validation()
-		
-		if(objValid.isNFTExist(nft)==False):
-			raise ValueError("NFT is not in the ledger")
-			
 		objSql=SqlRunner("Ledger.sqlite")
 		objSql.sql="""
 		  SElect 
@@ -113,12 +107,6 @@ class NFT:
 		publicKey=obj.privateKeyToPublicKey(privateKey)
 		
 		objValid=Validation()
-		
-		if(objValid.isNFTExist(nft)==True):
-			raise ValueError("NFT is already in the ledger")
-		
-		if(objValid.isPublicKeyExist(publicKey)==False):
-			raise ValueError("public key is not in the ledger")
 		
 		objSql=SqlRunner("Ledger.sqlite")
 		
@@ -191,15 +179,7 @@ class NFT:
 		
 		
 	def check_signature(self,sellerPublicKey,signature):
-		
-		objValid=Validation()
-		
-		if(objValid.isPublicKeyExist(sellerPublicKey)==False):
-			raise ValueError("public key is not in the ledger")
-		
-		if(objValid.isSignatureExist(signature)==False):
-			raise ValueError("signature is not in the ledger")
-		
+
 		obj=Cryptography()
 		objSql=SqlRunner("Ledger.sqlite")
 		
@@ -251,31 +231,12 @@ class NFT:
 	def transfer_nft(self,sellerPrivateKey,buyerPublicKey,nft):
 		obj=Cryptography()
 		sellerPublicKey=obj.privateKeyToPublicKey(sellerPrivateKey)
-		
-		objValid=Validation()
 		objSql=SqlRunner("Ledger.sqlite")
-	
-		if(objValid.isPublicKeyExist(sellerPublicKey)==False):
-			raise ValueError("seller public key is not in the ledger")
-			
-		if(objValid.isPublicKeyExist(buyerPublicKey)==False):
-			raise ValueError("buyer public key is not in the ledger")
-		
-		if(objValid.isNFTExist(nft)==False):
-			raise ValueError("NFT is not in the ledger")
-			
-		if(sellerPublicKey==buyerPublicKey):
-			raise ValueError("you have the ownership already")
-			
-		owner_data=self.findOwner(token=nft)[0]
-		owner=owner_data["buyer_public_key"]
+
+		owner_data=self.findOwner(nft=nft)[0]
 		level=owner_data["level"]
 		char=owner_data["char"]
 		fileLocation=owner_data["file_location"]
-		
-		
-		if(sellerPublicKey!=owner):
-			raise ValueError("you do not have the ownership ")
 		
 		eventDate=currentTime()
 		

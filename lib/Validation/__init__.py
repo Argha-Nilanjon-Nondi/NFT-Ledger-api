@@ -1,6 +1,15 @@
 from lib.SqlRunner import SqlRunner
 
 class Validation:
+
+	def checkJsonData(self,data,*keys):
+		for key in keys:
+			if(key not in data):
+				return False
+			if(data[key]==""):
+				return False
+		return True
+
 	def isPublicKeyExist(self,publicKey):
 		
 		objSql=SqlRunner("Ledger.sqlite")
