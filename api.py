@@ -1,9 +1,11 @@
 from lib.Validation import Validation
 from flask import Flask,request,jsonify
+from flask_cors import CORS
 from lib.User import User
 from lib.NFT import NFT
 from lib.SecretCrypto import Cryptography
 app=Flask(__name__)
+CORS(app)
 app.debug=True
 app.host="0.0.0.0"
 validated=Validation()
@@ -13,7 +15,7 @@ def verify_user_chain():
 	objUser=User()
 	data={}
 	data["message"]="Verify the chain of user"
-	data["code"]=200
+	data["code"]="200"
 	data["data"]={"status":objUser.verify()}
 	return data
 
@@ -22,7 +24,7 @@ def verify_nft_chain():
 	objNFT=NFT()
 	data={}
 	data["message"]="Verify the chain of NFT"
-	data["code"]=200
+	data["code"]="200"
 	data["data"]={"status":objNFT.verify()}
 	return data
 
@@ -56,7 +58,7 @@ def verify_signature():
 	objNFT = NFT()
 	data["code"]="200"
 	data["message"]="verification of a signature"
-	data["data"]={"signature":objNFT.check_signature(sellerPublicKey=sellerPublicKey,signature=signature)}
+	data["data"]={"status":objNFT.check_signature(sellerPublicKey=sellerPublicKey,signature=signature)}
 	return data
 
 

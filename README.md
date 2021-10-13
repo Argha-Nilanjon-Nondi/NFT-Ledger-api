@@ -209,7 +209,7 @@ POST http://localhost:5000/api/verify/signature
 {
     "code": "200",
     "data": {
-        "signature": true
+        "status": true
     },
     "message": "verification of a signature"
 }
