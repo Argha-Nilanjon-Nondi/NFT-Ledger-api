@@ -41,7 +41,7 @@ class NFT:
 				  FileLocation ,
 				  EventDate
 				  from NFTs 
-				  Where sellerPublicKey='{publicKey}' 
+				  Where buyerPublicKey='{publicKey}' 
 				  Order by datetime(EventDate)
 				""".format(publicKey=publicKey)
 
@@ -112,7 +112,9 @@ class NFT:
 		  Signature,
 		  Status,
 		  FileLocation ,
-		  EventDate
+		  EventDate,
+		  Char,
+		  Level
 		  from NFTs 
 		  Where NFT='{nft}' 
 		  Order by datetime(EventDate)  
@@ -132,7 +134,9 @@ class NFT:
 			"signature":data_list[0][2],
 			"status":data_list[0][3],
 			"file_location":data_list[0][4],
-			"event_date":data_list[0][5]
+			"event_date":data_list[0][5],
+				"char":data_list[0][6],
+			"level":data_list[0][7],
 				}
 			]
 			return data
