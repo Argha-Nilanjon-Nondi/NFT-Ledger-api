@@ -1,15 +1,36 @@
 
-# NFT Ledger
+# NFT Ledger REST API
 
 In this project , I have implemented blockchain technology with python. Here the data can not be changed or modify.So the database file can be share with anyone. If the person changes the database , we can detect it very easily.
-A user can add NFT and change it's ownership.
+A user can add NFT and change it's ownership. It is a rest api.
+
+<br>
+<br>
+
 
 ## Installation
 Install python 3.6 or higher version.
 And run this command
 ```bash
-  pip install pycryptodome
+pip install pycryptodome==3.11.0
+pip install flask==1.1.2
+pip install flask-cors==3.0.10
 ```
+
+<br>
+<br>
+
+
+## Knowledge
+- [NFT](https://en.wikipedia.org/wiki/Non-fungible_token)
+- [Blockchain](https://en.wikipedia.org/wiki/Blockchain)
+- [Public and private key](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
+- [Digital Signature](https://en.wikipedia.org/wiki/Digital_signature)
+- [Hashing](https://en.wikipedia.org/wiki/Hash_function)
+- [REST API](https://restfulapi.net/)
+
+<br>
+<br>
 
   
 ## API Reference
@@ -290,7 +311,7 @@ POST http://localhost:5000/api/profile/buyer
 ```
 
 <br />
-
+<br>
 
 ## Built with
 
@@ -300,7 +321,9 @@ POST http://localhost:5000/api/profile/buyer
 - blockchain
 - cryptography
 
-  
+<br>
+<br>
+
 ## Note
 - If you open the 'Ledger.sqlite' , you can not find the private key . So the database is a public ledger and it can shared with anyone.
 
@@ -315,6 +338,8 @@ POST http://localhost:5000/api/profile/buyer
 - It has some validation
 
 - You can use the pattern in other scenarios. Like storing hash of files .
+
+<br>
   
 ## License
 - You can use it for educational purpose

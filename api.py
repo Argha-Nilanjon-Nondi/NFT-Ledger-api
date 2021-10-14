@@ -35,7 +35,7 @@ def profile_seller():
 		return data
 
 	publicKey=json_data["public_key"]
-	
+
 	if (validated.isPublicKeyExist(publicKey) == False):
 		data["code"] = "404"
 		data["message"] = "public key is not in the ledger"
