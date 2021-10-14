@@ -19,6 +19,62 @@ def verify_user_chain():
 	data["data"]={"status":objUser.verify()}
 	return data
 
+@app.route("/api/profile/seller",methods=["POST"])
+def profile_seller():
+	data={}
+	json_data = request.json;
+
+	if (json_data == None):
+		data["code"] = "406"
+		data["message"] = "json data is not found"
+		return data
+
+	if (validated.checkJsonData(json_data, "public_key") == False):
+		data["code"] = "406"
+		data["message"] = "json data is not valid"
+		return data
+
+	publicKey=json_data["public_key"]
+	
+	if (validated.isPublicKeyExist(publicKey) == False):
+		data["code"] = "404"
+		data["message"] = "public key is not in the ledger"
+		return data
+
+	objNFT=NFT()
+	data["message"]="profile of an user as seller"
+	data["code"]="200"
+	data["data"]={"as_seller":objNFT.detail_as_seller(publicKey=publicKey)}
+	return data
+
+@app.route("/api/profile/buyer",methods=["POST"])
+def profile_buyer():
+	data={}
+	json_data = request.json;
+
+	if (json_data == None):
+		data["code"] = "406"
+		data["message"] = "json data is not found"
+		return data
+
+	if (validated.checkJsonData(json_data, "public_key") == False):
+		data["code"] = "406"
+		data["message"] = "json data is not valid"
+		return data
+
+	publicKey=json_data["public_key"]
+
+	if(validated.isPublicKeyExist(publicKey) == False):
+		data["code"] = "404"
+		data["message"] = "public key is not in the ledger"
+		return data
+
+	data["message"]="profile of an user as buyer"
+	data["code"]="200"
+	objNFT = NFT()
+	data["data"]={"as_buyer":objNFT.detail_as_buyer(publicKey=publicKey)}
+	return data
+
 @app.route("/api/verify/nft")
 def verify_nft_chain():
 	objNFT=NFT()

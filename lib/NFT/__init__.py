@@ -1,16 +1,58 @@
 from lib.SqlRunner import SqlRunner
 from lib.SecretCrypto import Cryptography
 from lib.Validation import Validation
-from datetime import datetime
-
-def currentTime():
-	now = datetime.now() 
-	date_time = now.strftime("%Y-%m-%d %H:%M:%S")
-	return date_time
-
+from lib.Utility import currentTime,listToDict
 
 class NFT:
-	
+
+	def detail_as_seller(self,publicKey):
+		objSql = SqlRunner("Ledger.sqlite")
+		objSql.sql = """
+				  SElECT
+				  No,
+				  BuyerPublicKey,
+				  Signature,
+				  Status,
+				  NFT,
+				  FileLocation ,
+				  EventDate
+				  from NFTs 
+				  Where sellerPublicKey='{publicKey}' 
+				  Order by datetime(EventDate)
+				""".format(publicKey=publicKey)
+
+		data_list = objSql.run()
+		if (len(data_list) == 0):
+			return []
+
+		else:
+			return listToDict(list=data_list,key=["no","buyer_public_key","signature","status","nft","file_location","event_date"])
+
+
+	def detail_as_buyer(self,publicKey):
+		objSql = SqlRunner("Ledger.sqlite")
+		objSql.sql = """
+				  SElECT
+				  No,
+				  SellerPublicKey,
+				  Signature,
+				  Status,
+				  NFT,
+				  FileLocation ,
+				  EventDate
+				  from NFTs 
+				  Where sellerPublicKey='{publicKey}' 
+				  Order by datetime(EventDate)
+				""".format(publicKey=publicKey)
+
+		data_list = objSql.run()
+		if (len(data_list) == 0):
+			return []
+
+		else:
+			return listToDict(list=data_list,key=["no","seller_public_key","signature","status","nft","file_location","event_date"])
+
+
 	def verify(self):
 			
 		obj=Cryptography()
@@ -60,7 +102,6 @@ class NFT:
 				return False
 		
 		return True
-		
 	
 	def findOwner(self,nft):
 		objSql=SqlRunner("Ledger.sqlite")
@@ -68,12 +109,10 @@ class NFT:
 		  SElect 
 		  SellerPublicKey,
 		  BuyerPublicKey,
-		  Token,
 		  Signature,
 		  Status,
-		  Level,
-		  Char,
-		  FileLocation  
+		  FileLocation ,
+		  EventDate
 		  from NFTs 
 		  Where NFT='{nft}' 
 		  Order by datetime(EventDate)  
@@ -90,12 +129,10 @@ class NFT:
 			"owner":data_list[0][1],
 			"seller_public_key":data_list[0][0],
 			"buyer_public_key":data_list[0][1],
-			"token":data_list[0][2],
-			"signature":data_list[0][3],
-			"status":data_list[0][4],
-			"level":data_list[0][5],
-			"char":data_list[0][6],
-			"file_location":data_list[0][7]
+			"signature":data_list[0][2],
+			"status":data_list[0][3],
+			"file_location":data_list[0][4],
+			"event_date":data_list[0][5]
 				}
 			]
 			return data

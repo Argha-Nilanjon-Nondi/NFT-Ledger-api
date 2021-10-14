@@ -172,14 +172,11 @@ POST http://localhost:5000/api/detail/nft
     "code": "202",
     "data": {
         "buyer_public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d4130.....",
-        "char": "0",
         "file_location": "https://drive.google.com/file/d/1mMLCgAOTddto82KTevoWjHu6EzjdtsFP/view?usp=drivesdk",
-        "level": 3,
         "owner": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d41304743537147534962.....",
         "seller_public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a4d4947664d41304743537147534.....",
         "signature": "543c6257c3c265e171783c5d1feb1038d909a0a319a34e05fc7b50aaa47a08fab.....",
         "status": "ownership_changed",
-        "token": 3728
     },
     "message": "detail of NFT has been retrieved"
 }
@@ -216,6 +213,84 @@ POST http://localhost:5000/api/verify/signature
 ```
 
 <br />
+
+
+
+
+### Defails of a profile as seller
+  
+#### URL  
+```http
+POST http://localhost:5000/api/profile/seller
+```
+
+#### Json Data
+```json
+{
+    "public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a......"
+}
+```
+
+#### Response
+```json
+{
+    "code": "200",
+    "data": {
+        "as_seller": [
+            {
+                "buyer_public_key": "2d2d2d2d2d424547494e205055424c4943204b4559......",
+                "event_date": "2021-10-14 08:59:55",
+                "file_location": "https://images.unsplash.com/photo-1634148208442-651545......",
+                "nft": "fe6c3ef3e77665d136d4f4d27eae5b5c2a97010807fef9ecfc0f6a4af6a8bf87",
+                "signature": "19aa451f26186673df2799f84e74b76a1d7fd3cdf0a68db3028893565bc620258.......",
+                "status": "nft_added"
+            }
+        ]
+    },
+    "message": "profile of an user as seller"
+}
+```
+
+<br />
+
+
+
+### Defails of a profile as buyer
+  
+#### URL  
+```http
+POST http://localhost:5000/api/profile/buyer
+```
+
+#### Json Data
+```json
+{
+    "public_key":"2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2d2d0a......"
+}
+```
+
+#### Response
+```json
+{
+    "code": "200",
+    "data": {
+        "as_buyer": [
+            {
+                "event_date": "2021-10-14 08:59:55",
+                "file_location": "https://images.unsplash.com/photo-1634148208442-651545....",
+                "nft": "fe6c3ef3e77665d136d4f4d27eae5b5c2a97010807fef9ecfc0f6a4af6a8bf87",
+                "seller_public_key": "2d2d2d2d2d424547494e205055424c4943204b45592d2d2d2......",
+                "signature": "19aa451f26186673df2799f84e74b76a1d7fd3cdf0a68db3028893565b.......",
+                "status": "nft_added"
+            }
+        ]
+    },
+    "message": "profile of an user as buyer"
+}
+```
+
+<br />
+
 
 ## Built with
 

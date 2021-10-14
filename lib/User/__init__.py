@@ -1,12 +1,6 @@
-from datetime import datetime
 from lib.SqlRunner import SqlRunner
 from lib.SecretCrypto import Cryptography
-from lib.Validation import Validation
-
-def currentTime():
-	now = datetime.now() 
-	date_time = now.strftime("%Y-%m-%d %H:%M:%S")
-	return date_time
+from lib.Utility import currentTime
 
 class User:
 	def __init__(self):
