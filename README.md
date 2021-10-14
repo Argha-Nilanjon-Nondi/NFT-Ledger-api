@@ -259,6 +259,7 @@ POST http://localhost:5000/api/profile/seller
     "data": {
         "as_seller": [
             {
+                "no":2,
                 "buyer_public_key": "2d2d2d2d2d424547494e205055424c4943204b4559......",
                 "event_date": "2021-10-14 08:59:55",
                 "file_location": "https://images.unsplash.com/photo-1634148208442-651545......",
@@ -297,6 +298,7 @@ POST http://localhost:5000/api/profile/buyer
     "data": {
         "as_buyer": [
             {
+                "no":2,
                 "event_date": "2021-10-14 08:59:55",
                 "file_location": "https://images.unsplash.com/photo-1634148208442-651545....",
                 "nft": "fe6c3ef3e77665d136d4f4d27eae5b5c2a97010807fef9ecfc0f6a4af6a8bf87",
