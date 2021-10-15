@@ -18,7 +18,7 @@ class NFT:
 				  EventDate
 				  from NFTs 
 				  Where sellerPublicKey='{publicKey}' 
-				  Order by datetime(EventDate)
+				  Order by datetime(EventDate) DESC
 				""".format(publicKey=publicKey)
 
 		data_list = objSql.run()
@@ -42,7 +42,7 @@ class NFT:
 				  EventDate
 				  from NFTs 
 				  Where buyerPublicKey='{publicKey}' 
-				  Order by datetime(EventDate)
+				  Order by datetime(EventDate) DESC
 				""".format(publicKey=publicKey)
 
 		data_list = objSql.run()
